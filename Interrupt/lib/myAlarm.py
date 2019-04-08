@@ -14,5 +14,5 @@ class Clock:
     self._led(1)
     self._wdt.feed()
     if self._count == self._max_count:
-       print("Alarm canceled afetr %s calls" % str(self._max_count))
+       print("Alarm canceled after %s calls" % str(self._max_count))
        alarm.cancel() # stop counting
