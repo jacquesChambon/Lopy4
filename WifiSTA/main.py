@@ -6,11 +6,14 @@ import pycom
 import time
 
 rtc = RTC()
+
+'''
 sd = SD()
 
 os.mount(sd, '/sd')
 print("SD card files :")
 print(os.listdir('/sd'))
+'''
 
 print("Network config :")
 print(wlan.ifconfig())
