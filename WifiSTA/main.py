@@ -1,26 +1,11 @@
 """ TOCS example usage """
 
-from machine import SD, RTC
-import os
-import pycom
-import time
+import machine, os, pycom, time, socket, sys
 
-rtc = RTC()
+rtc = machine.RTC()
 
-'''
-sd = SD()
-
-os.mount(sd, '/sd')
-print("SD card files :")
-print(os.listdir('/sd'))
-'''
-
-print("Network config :")
+print("Network config :", end='')
 print(wlan.ifconfig())
-
-def pled():
-    pycom.heartbeat(False)
-    pycom.rgbled(0xff00)
 
 print('Syncing time with "pool.ntp.org"')
 rtc.ntp_sync("pool.ntp.org")
@@ -29,3 +14,15 @@ while not rtc.synced():
 print("RTC NTP sync complete")
 now = rtc.now()
 print("Current Date and Time : %s/%s/%s at %s:%s" % (now[2], now[1], now[0], now[3], now[4]))
+
+# A telnet like connection to emulate an HTTP GET request on google.com
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.settimeout(4)
+
+adr_info=socket.getaddrinfo('www.google.com', 80)
+print("www.google.com addrinfo is : %s" % adr_info)
+s.connect(adr_info[0][-1])
+
+print("sending HTTP GET request")
+s.send('GET\n')
+print(s.recv(1000))
