@@ -8,10 +8,10 @@ wlan = WLAN(mode=WLAN.STA)
 SSID=None
 PASS=None
 
-'''
+
 SSID='iPhone 6S de Jacques'
 PASS='0670726938'
-
+'''
 SSID='Toscane'
 PASS='0492420299'
 '''
